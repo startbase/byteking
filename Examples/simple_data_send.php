@@ -1,6 +1,5 @@
 <?php
-include(__DIR__.'/../ByteKingClient.php');
-include(__DIR__.'/../Transport/TransportUDP.php');
+require_once(dirname(__FILE__) . "/../lib/ByteKingClient.php");
 
 //initialising transmitter and client
 $data_transfer = new TransportUDP();
