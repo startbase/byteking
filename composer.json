@@ -1,4 +1,15 @@
 {
   "name": "startbase/byteking-php",
-  "description": "php client for ByteKing"
+  "description": "php client for ByteKing",
+  "keywords": [
+    "analytics client",
+    "php"
+  ],
+  "license": "MIT",
+  "require": {
+    "php": ">=5.0"
+  },
+  "autoload": {
+    "files": ["lib/ByteKingClient.php"]
+  }
 }

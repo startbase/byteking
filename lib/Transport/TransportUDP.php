@@ -1,5 +1,6 @@
 <?php
-include(__DIR__.'/TransportInterface.php');
+
+require_once(dirname(__FILE__) . "/TransportInterface.php");
 
 class TransportUDP implements TransportInterface {
     private $server_ip = '127.0.0.1';
