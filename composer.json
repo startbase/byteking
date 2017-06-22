@@ -1,6 +1,8 @@
 {
   "name": "startbase/byteking-php",
   "description": "php client for ByteKing",
+  "type": "library",
+  "minimum-stability": "dev",
   "keywords": [
     "analytics client",
     "php"
