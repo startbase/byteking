@@ -9,7 +9,7 @@ Add startbase/byteking-php as a dependency and run composer update
 ```json
 "require": {
     ...
-    "startbase/byteking-php" : "1.*"
+    "startbase/byteking-php" : "latest"
     ...
 }
 ```
