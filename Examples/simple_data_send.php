@@ -1,5 +1,6 @@
 <?php
-require_once(dirname(__FILE__) . "/../lib/ByteKingClient.php");
+use ByteKing\Transport\TransportUDP;
+use ByteKing\ByteKingClient;
 
 //initialising transmitter and client
 $data_transfer = new TransportUDP();

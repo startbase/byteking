@@ -1,7 +1,7 @@
 <?php
+namespace ByteKing;
 
-require_once(dirname(__FILE__) . "/Transport/TransportInterface.php");
-require_once(dirname(__FILE__) . "/Transport/TransportUDP.php");
+use ByteKing\Transport\TransportInterface;
 
 /**
  * Class ByteKingClient
@@ -15,12 +15,12 @@ class ByteKingClient {
     /**
      * @param $type
      * @param $data
-     * @throws Exception
+     * @throws \Exception
      */
     public static function send($type, $data)
     {
         if(!static::$api_key) {
-            throw new Exception('Wrong api key');
+            throw new \Exception('Wrong api key');
         }
 
         $message = static::getPreparedData($type, $data);

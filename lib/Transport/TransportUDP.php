@@ -1,10 +1,13 @@
 <?php
+namespace ByteKing\Transport;
 
-require_once(dirname(__FILE__) . "/TransportInterface.php");
-
+/**
+ * Class TransportUDP
+ * @package ByteKing\Transport
+ */
 class TransportUDP implements TransportInterface {
-    private $server_ip = '127.0.0.1';
-    private $server_port = '41452';
+    private $server_ip;
+    private $server_port;
 
     private static $socket = null;
 
@@ -23,6 +26,10 @@ class TransportUDP implements TransportInterface {
     public function send($data)
     {
         $this->initConnection();
+        if(!$this->server_ip || !$this->server_port) {
+            throw new \Exception('ip address and port are required');
+        }
+
         socket_sendto(static::$socket, $data, mb_strlen($data), 0, $this->server_ip, $this->server_port);
     }
 
