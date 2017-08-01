@@ -1,7 +1,5 @@
 <?php
 
-require_once(dirname(__FILE__) . "/TransportInterface.php");
-
 class TransportUDP implements TransportInterface {
     private $server_ip = '127.0.0.1';
     private $server_port = '41452';
@@ -12,6 +10,7 @@ class TransportUDP implements TransportInterface {
     {
         if(!static::$socket) {
             static::$socket = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
+            socket_set_nonblock(static::$socket);
         }
     }
 

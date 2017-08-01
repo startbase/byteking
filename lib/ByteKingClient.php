@@ -1,8 +1,5 @@
 <?php
 
-require_once(dirname(__FILE__) . "/Transport/TransportInterface.php");
-require_once(dirname(__FILE__) . "/Transport/TransportUDP.php");
-
 /**
  * Class ByteKingClient
  */

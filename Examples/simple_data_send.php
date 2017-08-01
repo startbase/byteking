@@ -6,7 +6,7 @@ $data_transfer = new TransportUDP();
 $data_transfer->setConfiguration('127.0.0.1', '41452');
 ByteKingClient::setTransport($data_transfer);
 
-$api = 'Oa3JTG47gp9ew8ghp616zp';
+$api = 'your_key';
 ByteKingClient::setApiKey($api);
 
 
