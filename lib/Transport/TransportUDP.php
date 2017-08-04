@@ -15,6 +15,7 @@ class TransportUDP implements TransportInterface {
     {
         if(!static::$socket) {
             static::$socket = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
+            socket_set_nonblock(static::$socket);
         }
     }
 
