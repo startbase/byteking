@@ -1,4 +1,5 @@
 <?php
+namespace ByteKing\Transport;
 
 /**
  * Interface TransportInterface

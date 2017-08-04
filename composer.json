@@ -10,6 +10,8 @@
   "version": "0.1.1",
   "license": "MIT",
   "autoload": {
-    "files": ["lib/ByteKingClient.php"]
+    "psr-4": {
+      "ByteKing": "lib/"
+    }
   }
 }

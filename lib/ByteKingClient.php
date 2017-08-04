@@ -1,4 +1,7 @@
 <?php
+namespace ByteKing;
+
+use ByteKing\Transport\TransportInterface;
 
 /**
  * Class ByteKingClient
@@ -12,12 +15,12 @@ class ByteKingClient {
     /**
      * @param $type
      * @param $data
-     * @throws Exception
+     * @throws \Exception
      */
     public static function send($type, $data)
     {
         if(!static::$api_key) {
-            throw new Exception('Wrong api key');
+            throw new \Exception('Wrong api key');
         }
 
         $message = static::getPreparedData($type, $data);
