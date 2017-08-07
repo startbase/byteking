@@ -1,7 +1,7 @@
 <?php
-namespace ByteKing;
+namespace startbase\ByteKing;
 
-use ByteKing\Transport\TransportInterface;
+use startbase\ByteKing\Transport\TransportInterface;
 
 /**
  * Class ByteKingClient

@@ -10,7 +10,7 @@
   "license": "MIT",
   "autoload": {
     "psr-4": {
-      "ByteKing\\": "lib/"
+      "startbase\\ByteKing\\": "src/"
     }
   }
 }
