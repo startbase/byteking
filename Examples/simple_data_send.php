@@ -1,10 +1,10 @@
 <?php
-use ByteKing\Transport\TransportUDP;
-use ByteKing\ByteKingClient;
+use startbase\ByteKing\Transport\TransportUDP;
+use startbase\ByteKing\ByteKingClient;
 
-require_once(dirname(__FILE__) . "/../lib/ByteKingClient.php");
-require_once(dirname(__FILE__) . "/../lib/Transport/TransportInterface.php");
-require_once(dirname(__FILE__) . "/../lib/Transport/TransportUDP.php");
+require_once(dirname(__FILE__) . "/../src/ByteKingClient.php");
+require_once(dirname(__FILE__) . "/../src/Transport/TransportInterface.php");
+require_once(dirname(__FILE__) . "/../src/Transport/TransportUDP.php");
 
 //initialising transmitter and client
 $data_transfer = new TransportUDP();
