@@ -6,6 +6,8 @@
     "analytics client",
     "php"
   ],
+  "minimum-stability": "dev",
+  "version": "1.0.2",
   "license": "MIT",
   "autoload": {
     "psr-4": {
