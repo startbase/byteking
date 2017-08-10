@@ -2,15 +2,16 @@
   "name": "startbase/byteking-php",
   "description": "The new generation monitoring and analytics service agent for ambitious applications.",
   "type": "library",
-  "minimum-stability": "dev",
   "keywords": [
     "analytics client",
     "php"
   ],
+  "minimum-stability": "dev",
+  "version": "1.0.2",
   "license": "MIT",
   "autoload": {
     "psr-4": {
-      "ByteKing\\": "lib/"
+      "startbase\\ByteKing\\": "src/"
     }
   }
 }
