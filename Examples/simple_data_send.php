@@ -6,19 +6,18 @@ require_once(dirname(__FILE__) . "/../src/ByteKingClient.php");
 require_once(dirname(__FILE__) . "/../src/Transport/TransportInterface.php");
 require_once(dirname(__FILE__) . "/../src/Transport/TransportUDP.php");
 
-//initialising transmitter and client
-$data_transfer = new TransportUDP();
-$data_transfer->setConfiguration('127.0.0.1', '4000');
-ByteKingClient::setTransport($data_transfer);
+// initialising transport and client
+$transport = new TransportUDP('127.0.0.1', '4000');
 
-$api = 'your_key';
-ByteKingClient::setApiKey($api);
+$bk_client = new ByteKingClient();
+$bk_client->setTransport($transport);
 
+$bk_client->setApiKey('your_key');
 
-//php script
+// php script
 echo "Doing something\n";
 
-//metric sending
+// metric sending
 
 $msg = 'Current date is '.date('Y-m-d H:i:s').' ';
 
@@ -28,6 +27,6 @@ for ($i = 0; $i < 300000; $i++) {
     $msg .= rand(0, 9);
 }*/
 
-ByteKingClient::send('long_type', 'Msg: '.$msg);
+$bk_client->send('long_type', 'Msg: '.$msg);
 
 echo "The end of test script\n";
