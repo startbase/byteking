@@ -6,34 +6,50 @@ namespace startbase\ByteKing\Transport;
  * @package ByteKing\Transport
  */
 class TransportUDP implements TransportInterface {
-    private $server_ip;
-    private $server_port;
+    private $host;
+    private $port;
 
-    private static $socket = null;
+    private $socket;
 
     const MAX_LENGTH = 50000;
     const MAX_MULTI_PARTS_SEND = 999;
     const PART_PREFIX = '_p_';
 
-    public function initConnection()
-    {
-        if(!static::$socket) {
-            static::$socket = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
-            socket_set_nonblock(static::$socket);
+    /**
+     * TransportUDP constructor.
+     * @param $host
+     * @param $port
+     */
+    public function __construct($host, $port) {
+        $this->setConfiguration($host, $port);
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function initConnection() {
+        if ($this->socket) {
+            return $this;
         }
+
+        $this->socket = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
+        socket_set_nonblock($this->socket);
+        return $this;
     }
 
-    public function closeConnection()
-    {
-        socket_close(static::$socket);
+    /**
+     * @return $this
+     */
+    public function closeConnection() {
+        if ($this->socket) {
+            socket_close($this->socket);
+        }
+        return $this;
     }
 
-    public function send($data)
-    {
+    public function send($data) {
         $this->initConnection();
-        if(!$this->server_ip || !$this->server_port) {
-            throw new \Exception('ip address and port are required');
-        }
 
         if (mb_strlen($data) > static::MAX_LENGTH) {
             $data = $this->createMultiUdpMsg($data);
@@ -49,7 +65,7 @@ class TransportUDP implements TransportInterface {
     }
 
     protected function _send($data) {
-        socket_sendto(static::$socket, $data, mb_strlen($data), 0, $this->server_ip, $this->server_port);
+        socket_sendto($this->socket, $data, mb_strlen($data), 0, $this->host, $this->port);
     }
 
     /**
@@ -59,7 +75,7 @@ class TransportUDP implements TransportInterface {
     protected function createMultiUdpMsg($data) {
 
         $md5_msg = md5($data);
-        $md5_hash = md5(uniqid($md5_msg)).'_'.$md5_msg;
+        $md5_hash = md5(uniqid($md5_msg)) . '_' . $md5_msg;
 
         $parts = str_split($data, static::MAX_LENGTH);
 
@@ -75,8 +91,8 @@ class TransportUDP implements TransportInterface {
         $parts_count_str = str_pad($parts_count, $key_length, 0, STR_PAD_LEFT);
         foreach ($parts as $part) {
             $i++;
-            $line = static::PART_PREFIX.$parts_count_str.'_'.str_pad($i, $key_length, 0, STR_PAD_LEFT);
-            $line .= '_'.$md5_hash.DIRECTORY_SEPARATOR.$part;
+            $line = static::PART_PREFIX . $parts_count_str . '_' . str_pad($i, $key_length, 0, STR_PAD_LEFT);
+            $line .= '_' . $md5_hash . DIRECTORY_SEPARATOR . $part;
             $data[] = $line;
         }
 
@@ -84,14 +100,13 @@ class TransportUDP implements TransportInterface {
     }
 
     /**
-     * @param $server_ip
-     * @param $server_port
+     * @param $host
+     * @param $port
      * @return $this
      */
-    public function setConfiguration($server_ip, $server_port)
-    {
-        $this->server_ip = $server_ip;
-        $this->server_port = $server_port;
+    public function setConfiguration($host, $port) {
+        $this->host = $host;
+        $this->port = $port;
         return $this;
     }
 }

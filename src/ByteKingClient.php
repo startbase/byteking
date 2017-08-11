@@ -7,24 +7,28 @@ use startbase\ByteKing\Transport\TransportInterface;
  * Class ByteKingClient
  */
 class ByteKingClient {
-    /** @var null | string */
-    protected static $api_key = null;
+    /** @var null|string */
+    protected $api_key;
+
     /** @var TransportInterface */
-    private static $transport;
+    private $transport;
 
     /**
      * @param $type
      * @param $data
      * @throws \Exception
      */
-    public static function send($type, $data)
-    {
-        if(!static::$api_key) {
+    public function send($type, $data) {
+        if (!$this->api_key) {
             throw new \Exception('Wrong api key');
         }
 
-        $message = static::getPreparedData($type, $data);
-        static::$transport->send($message);
+        if (!$this->transport) {
+            throw new \Exception('Transport not set');
+        }
+
+        $message = $this->getPreparedData($type, $data);
+        $this->transport->send($message);
     }
 
     /**
@@ -32,9 +36,9 @@ class ByteKingClient {
      * @param mixed $data
      * @return string
      */
-    private static function getPreparedData($data_type, $data) {
+    private function getPreparedData($data_type, $data) {
         $message = [
-            'api_key' => static::$api_key,
+            'api_key' => $this->api_key,
             'type' => $data_type,
             'data' => $data
         ];
@@ -45,17 +49,15 @@ class ByteKingClient {
     /**
      * @param string $api_key
      */
-    public static function setApiKey($api_key)
-    {
-        static::$api_key = $api_key;
+    public function setApiKey($api_key) {
+        $this->api_key = $api_key;
     }
 
     /**
      * @param TransportInterface $transport
      */
-    public static function setTransport(TransportInterface $transport)
-    {
-        static::$transport = $transport;
+    public function setTransport(TransportInterface $transport) {
+        $this->transport = $transport;
     }
 
 }
